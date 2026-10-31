@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nông Trại Vui Vẻ - Bản Lễ Hội Độc Quyền & Lâu Đài Lv.30</title>
+    <title>Nông Trại Vui Vẻ - Bản Chuẩn Cổ Điển Zing Me</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
-        body { font-family: 'Fredoka', sans-serif; background-color: #f0fdf4; }
+        body { font-family: 'Fredoka', sans-serif; background-color: #1e293b; background-image: radial-gradient(#334155 1px, transparent 1px); background-size: 20px 20px; }
         .game-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); }
     </style>
 </head>
 <body class="min-h-screen text-slate-700 flex flex-col">
 
     <!-- Header Thông Tin Người Chơi -->
-    <header class="bg-amber-600 text-white shadow-md p-4 sticky top-0 z-50">
+    <header class="bg-amber-600 text-white shadow-md p-4 sticky top-0 z-50 border-b-4 border-amber-800">
         <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4">
             <div class="flex items-center space-x-3">
                 <span class="text-3xl">👑</span>
                 <div>
-                    <h1 class="text-xl font-bold">Nông Trại Vui Vẻ <span id="player-title" class="text-xs bg-yellow-500 text-amber-900 px-2 py-0.5 rounded-full">Nông Dân Tập Sự</span></h1>
+                    <h1 class="text-xl font-bold">Nông Trại Vui Vẻ <span id="player-title" class="text-xs bg-yellow-500 text-amber-900 px-2 py-0.5 rounded-full font-bold">Nông Dân Tập Sự</span></h1>
                     <p class="text-xs text-amber-100">Bệ hạ: <span id="player-name">Hồ Hải Đăng</span> | Cấp độ: <span id="player-level" class="font-bold text-yellow-300">1</span>/100</p>
                 </div>
             </div>
-            <div class="flex items-center space-x-4 bg-amber-700 px-4 py-2 rounded-xl shadow-inner text-sm md:text-base">
+            <div class="flex items-center space-x-4 bg-amber-700 px-4 py-2 rounded-xl shadow-inner text-sm md:text-base border border-amber-800">
                 <div class="flex items-center space-x-1 cursor-pointer hover:opacity-80" onclick="switchTab('shop')">
                     <span>🪙 Vàng:</span>
                     <span id="player-gold" class="font-bold text-yellow-300">2000</span>
                 </div>
-                <div class="flex items-center space-x-1 cursor-pointer hover:opacity-80 bg-amber-800 px-2 py-0.5 rounded-lg" onclick="openTopUpModal()">
+                <div class="flex items-center space-x-1 cursor-pointer hover:opacity-80 bg-amber-800 px-2.5 py-1 rounded-lg" onclick="openTopUpModal()">
                     <span>💎 Kim Cương:</span>
                     <span id="player-diamond" class="font-bold text-cyan-300">100</span>
                 </div>
@@ -40,76 +40,76 @@
         </div>
     </header>
 
-    <!-- Banner Sự Kiện & Ngày Lễ -->
-    <div id="event-banner" class="bg-gradient-to-r from-red-600 to-amber-600 text-white py-2 px-4 text-center text-xs md:text-sm font-bold shadow-inner">
+    <!-- Banner Sự Kiện Ngày Lễ -->
+    <div id="event-banner" class="bg-gradient-to-r from-red-600 to-amber-600 text-white py-2 px-4 text-center text-xs md:text-sm font-bold shadow-md">
         🎉 Đang diễn ra: <span id="current-event-text">Hệ thống Nông Trại Vui Vẻ chào mừng bệ hạ!</span>
     </div>
 
     <!-- Thanh Điều Hướng Tab -->
-    <nav class="bg-emerald-700 text-white shadow">
-        <div class="max-w-6xl mx-auto flex flex-wrap justify-center space-x-1 md:space-x-2 p-2 text-xs md:text-sm">
-            <button onclick="switchTab('farm')" id="btn-farm" class="px-3 py-2 rounded-lg font-semibold bg-emerald-800 transition shadow">🌾 Nông Trại</button>
-            <button onclick="switchTab('pond')" id="btn-pond" class="px-3 py-2 rounded-lg font-semibold hover:bg-emerald-600 transition">🐟 Ao Cá</button>
-            <button onclick="switchTab('fusion')" id="btn-fusion" class="px-3 py-2 rounded-lg font-semibold hover:bg-emerald-600 transition">🔮 Ép Cá <span id="lock-fusion" class="text-[9px] bg-red-500 px-1 rounded">Lv.3</span></button>
-            <button onclick="switchTab('social')" id="btn-social" class="px-3 py-2 rounded-lg font-semibold hover:bg-emerald-600 transition">🤝 Bạn Bè <span id="lock-social" class="text-[9px] bg-red-500 px-1 rounded">Lv.5</span></button>
-            <button onclick="switchTab('decor')" id="btn-decor" class="px-3 py-2 rounded-lg font-semibold hover:bg-emerald-600 transition">🏰 Lâu Đài <span id="lock-decor" class="text-[9px] bg-red-500 px-1 rounded">Lv.10</span></button>
-            <button onclick="switchTab('weekend')" id="btn-weekend" class="px-3 py-2 rounded-lg font-semibold hover:bg-emerald-600 transition bg-amber-800">🎁 Sự Kiện Lễ</button>
-            <button onclick="switchTab('collection')" id="btn-collection" class="px-3 py-2 rounded-lg font-semibold hover:bg-emerald-600 transition">🏆 Sưu Tập <span id="lock-col" class="text-[9px] bg-red-500 px-1 rounded">Lv.15</span></button>
-            <button onclick="switchTab('shop')" id="btn-shop" class="px-3 py-2 rounded-lg font-semibold hover:bg-emerald-600 transition">🛒 Cửa Hàng</button>
-            <button onclick="switchTab('inventory')" id="btn-inventory" class="px-3 py-2 rounded-lg font-semibold hover:bg-emerald-600 transition">🎒 Kho Đồ</button>
+    <nav class="bg-emerald-800 text-white shadow border-b-4 border-emerald-900">
+        <div class="max-w-6xl mx-auto flex flex-wrap justify-center space-x-1 md:space-x-2 p-2 text-xs md:text-sm font-semibold">
+            <button onclick="switchTab('farm')" id="btn-farm" class="px-3 py-2 rounded-lg bg-emerald-900 transition shadow">🌾 Nông Trại</button>
+            <button onclick="switchTab('pond')" id="btn-pond" class="px-3 py-2 rounded-lg hover:bg-emerald-700 transition">🐟 Ao Cá</button>
+            <button onclick="switchTab('fusion')" id="btn-fusion" class="px-3 py-2 rounded-lg hover:bg-emerald-700 transition">🔮 Ép Cá <span id="lock-fusion" class="text-[9px] bg-red-500 px-1 rounded">Lv.3</span></button>
+            <button onclick="switchTab('social')" id="btn-social" class="px-3 py-2 rounded-lg hover:bg-emerald-700 transition">🤝 Bạn Bè <span id="lock-social" class="text-[9px] bg-red-500 px-1 rounded">Lv.5</span></button>
+            <button onclick="switchTab('decor')" id="btn-decor" class="px-3 py-2 rounded-lg hover:bg-emerald-700 transition">🏰 Lâu Đài <span id="lock-decor" class="text-[9px] bg-red-500 px-1 rounded">Lv.10</span></button>
+            <button onclick="switchTab('weekend')" id="btn-weekend" class="px-3 py-2 rounded-lg hover:bg-emerald-700 transition bg-amber-800">🎁 Sự Kiện Lễ</button>
+            <button onclick="switchTab('collection')" id="btn-collection" class="px-3 py-2 rounded-lg hover:bg-emerald-700 transition">🏆 Sưu Tập <span id="lock-col" class="text-[9px] bg-red-500 px-1 rounded">Lv.15</span></button>
+            <button onclick="switchTab('shop')" id="btn-shop" class="px-3 py-2 rounded-lg hover:bg-emerald-700 transition">🛒 Cửa Hàng</button>
+            <button onclick="switchTab('inventory')" id="btn-inventory" class="px-3 py-2 rounded-lg hover:bg-emerald-700 transition">🎒 Kho Đồ</button>
         </div>
     </nav>
 
     <!-- Khu Vực Nội Dung Chính -->
     <main class="flex-1 max-w-6xl w-full mx-auto p-4 md:p-6 space-y-6">
         
-        <!-- TAB 1: NÔNG TRẠI -->
+        <!-- TAB 1: NÔNG TRẠI (Giao diện đất nâu chéo phong cách cổ điển) -->
         <section id="tab-farm" class="space-y-4">
-            <div class="flex justify-between items-center bg-amber-100 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-sm">
+            <div class="flex justify-between items-center bg-amber-100 border-l-4 border-amber-600 p-4 rounded-r-lg shadow-sm">
                 <div>
-                    <p class="font-semibold text-amber-800">💡 Hướng dẫn Nông Trại:</p>
-                    <p class="text-sm text-amber-700">Trồng trọt và thu hoạch nông sản. Cuối tuần được <span class="text-emerald-700 font-bold">X2 Vàng & Giảm 30% thời gian</span>!</p>
+                    <p class="font-semibold text-amber-900">🌾 Khu Vực Nông Trại:</p>
+                    <p class="text-xs text-amber-800">Chỉ được phép gieo trồng các loại **Hạt Giống (Seed)** lên ô đất. Tuyệt đối không thể thả cá xuống đất!</p>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <span class="text-xs font-bold text-amber-900 bg-amber-200 px-3 py-1 rounded-full">Ô đất: <span id="farm-unlocked-count">4</span>/12</span>
+                    <span class="text-xs font-bold text-amber-900 bg-amber-200 px-3 py-1 rounded-full border border-amber-300">Ô đất: <span id="farm-unlocked-count">4</span>/12</span>
                     <button onclick="buyPlotWithDiamond()" class="bg-cyan-600 hover:bg-cyan-700 text-white text-xs px-3 py-1.5 rounded-lg font-bold shadow">💎 Mở Đất (50 💎)</button>
                 </div>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" id="farm-grid"></div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 bg-amber-950/40 p-4 rounded-2xl border-2 border-amber-900/50 shadow-inner" id="farm-grid"></div>
         </section>
 
-        <!-- TAB 2: AO CÁ -->
+        <!-- TAB 2: AO CÁ (Giao diện mặt nước xanh lam) -->
         <section id="tab-pond" class="hidden space-y-4">
-            <div class="flex justify-between items-center bg-cyan-100 border-l-4 border-cyan-500 p-4 rounded-r-lg shadow-sm">
+            <div class="flex justify-between items-center bg-cyan-100 border-l-4 border-cyan-600 p-4 rounded-r-lg shadow-sm">
                 <div>
-                    <p class="font-semibold text-cyan-800">💡 Hướng dẫn Ao Cá:</p>
-                    <p class="text-sm text-cyan-700">Thả cá vào ao để thu hoạch cá trưởng thành và tích lũy EXP lên cấp 100!</p>
+                    <p class="font-semibold text-cyan-900">🐟 Khu Vực Ao Cá:</p>
+                    <p class="text-xs text-cyan-800">Chỉ được phép thả các loại **Cá Giống (Fish)** vào ao. Không thể mang hạt giống ra thả xuống nước!</p>
                 </div>
-                <span class="text-xs font-bold text-cyan-900 bg-cyan-200 px-3 py-1 rounded-full">Ao cá: <span id="pond-unlocked-count">4</span>/12</span>
+                <span class="text-xs font-bold text-cyan-900 bg-cyan-200 px-3 py-1 rounded-full border border-cyan-300">Ao cá: <span id="pond-unlocked-count">4</span>/12</span>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" id="pond-grid"></div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 bg-cyan-950/40 p-4 rounded-2xl border-2 border-cyan-900/50 shadow-inner" id="pond-grid"></div>
         </section>
 
         <!-- TAB 3: ÉP CÁ -->
         <section id="tab-fusion" class="hidden space-y-4">
-            <div class="bg-purple-100 border-l-4 border-purple-500 p-4 rounded-r-lg shadow-sm">
-                <p class="font-semibold text-purple-800">🔮 Bàn Ép Cá Thần Kỳ (Mở khóa Lv.3):</p>
-                <p class="text-sm text-purple-700">Cuối tuần được <span class="text-purple-800 font-bold">Buff +20% tỷ lệ thành công</span>!</p>
+            <div class="bg-purple-100 border-l-4 border-purple-600 p-4 rounded-r-lg shadow-sm">
+                <p class="font-semibold text-purple-900">🔮 Bàn Ép Cá Thần Kỳ (Mở khóa Lv.3):</p>
+                <p class="text-xs text-purple-800">Cuối tuần được <span class="text-purple-900 font-bold">Buff +20% tỷ lệ thành công</span>!</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="game-panel p-5 rounded-2xl shadow-md space-y-4 border border-purple-200">
+                <div class="game-panel p-5 rounded-2xl shadow-md space-y-4 border border-purple-300">
                     <h3 class="font-bold text-purple-900">✨ Cá Rồng Hoàng Kim</h3>
                     <p class="text-xs text-gray-500">Nguyên liệu: 2x Cá Chép Trưởng Thành</p>
-                    <div class="flex items-center justify-around bg-purple-50 p-3 rounded-xl"><span>🐟 + 🐟 ➔ 🐉</span></div>
+                    <div class="flex items-center justify-around bg-purple-50 p-3 rounded-xl border border-purple-200"><span>🐟 + 🐟 ➔ 🐉</span></div>
                     <div class="flex space-x-2">
                         <button onclick="fuseFish('recipe1', false)" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl shadow text-xs">Ép Thường (<span id="rate-1">60</span>%)</button>
                         <button onclick="fuseFish('recipe1', true)" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 rounded-xl shadow text-xs">Bùa 100% (20 💎)</button>
                     </div>
                 </div>
-                <div class="game-panel p-5 rounded-2xl shadow-md space-y-4 border border-purple-200">
+                <div class="game-panel p-5 rounded-2xl shadow-md space-y-4 border border-purple-300">
                     <h3 class="font-bold text-purple-900">✨ Cá Thần Bảy Sắc</h3>
                     <p class="text-xs text-gray-500">Nguyên liệu: 1x Cá Hồi + 1x Cá Nóc Gai</p>
-                    <div class="flex items-center justify-around bg-purple-50 p-3 rounded-xl"><span>🐠 + 🐡 ➔ 🌈</span></div>
+                    <div class="flex items-center justify-around bg-purple-50 p-3 rounded-xl border border-purple-200"><span>🐠 + 🐡 ➔ 🌈</span></div>
                     <div class="flex space-x-2">
                         <button onclick="fuseFish('recipe2', false)" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl shadow text-xs">Ép Thường (<span id="rate-2">50</span>%)</button>
                         <button onclick="fuseFish('recipe2', true)" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 rounded-xl shadow text-xs">Bùa 100% (30 💎)</button>
@@ -120,9 +120,9 @@
 
         <!-- TAB 4: BẠN BÈ -->
         <section id="tab-social" class="hidden space-y-4">
-            <div class="bg-indigo-100 border-l-4 border-indigo-500 p-4 rounded-r-lg shadow-sm">
-                <p class="font-semibold text-indigo-800">🤝 Hàng Xóm & Thú Cưng (Mở khóa Lv.5):</p>
-                <p class="text-sm text-indigo-700">Thăm vườn bạn bè, hái trộm nông sản và nâng cấp Thần Khuyển canh vườn!</p>
+            <div class="bg-indigo-100 border-l-4 border-indigo-600 p-4 rounded-r-lg shadow-sm">
+                <p class="font-semibold text-indigo-900">🤝 Hàng Xóm & Thú Cưng (Mở khóa Lv.5):</p>
+                <p class="text-xs text-indigo-800">Thăm vườn bạn bè, hái trộm nông sản và nâng cấp Thần Khuyển canh vườn!</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="game-panel p-4 rounded-2xl shadow-sm border border-indigo-200 space-y-3">
@@ -131,7 +131,7 @@
                 </div>
                 <div class="game-panel p-4 rounded-2xl shadow-sm border border-indigo-200 space-y-3">
                     <h3 class="font-bold text-indigo-900">📜 Nhật Ký & Thú Cưng</h3>
-                    <div class="flex items-center justify-between bg-indigo-50 p-3 rounded-xl text-xs">
+                    <div class="flex items-center justify-between bg-indigo-50 p-3 rounded-xl text-xs border border-indigo-200">
                         <div class="flex items-center space-x-2">
                             <span class="text-2xl" id="dog-icon">🐕</span>
                             <div>
@@ -139,7 +139,7 @@
                                 <p class="text-gray-500" id="dog-status">Đang canh giữ an toàn</p>
                             </div>
                         </div>
-                        <button onclick="upgradeDog()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg font-bold">Nâng Cấp (100 💎)</button>
+                        <button onclick="upgradeDog()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg font-bold shadow">Nâng Cấp (100 💎)</button>
                     </div>
                     <div id="activity-log" class="bg-white p-3 rounded-xl border border-gray-200 h-32 overflow-y-auto text-xs space-y-1 text-gray-600">
                         <p>✨ Chào mừng bệ hạ đến với Nông Trại Vui Vẻ!</p>
@@ -150,15 +150,15 @@
 
         <!-- TAB 5: LÂU ĐÀI TỐI ĐA LV.30 -->
         <section id="tab-decor" class="hidden space-y-4">
-            <div class="bg-pink-100 border-l-4 border-pink-500 p-4 rounded-r-lg shadow-sm">
-                <p class="font-semibold text-pink-800">🏰 Lâu Đài Hoàng Gia (Nâng cấp tối đa Lv.30):</p>
-                <p class="text-sm text-pink-700">Nâng cấp Lâu Đài qua 30 bậc để thống lĩnh điền trang, tăng cường phong thủy và gia tăng thu hoạch!</p>
+            <div class="bg-pink-100 border-l-4 border-pink-600 p-4 rounded-r-lg shadow-sm">
+                <p class="font-semibold text-pink-900">🏰 Lâu Đài Hoàng Gia (Nâng cấp tối đa Lv.30):</p>
+                <p class="text-xs text-pink-800">Nâng cấp Lâu Đài qua 30 bậc để thống lĩnh điền trang, tăng cường phong thủy và gia tăng thu hoạch!</p>
             </div>
-            <div class="game-panel p-6 rounded-2xl shadow-md border border-pink-200 space-y-4 text-center max-w-md mx-auto">
+            <div class="game-panel p-6 rounded-2xl shadow-md border border-pink-300 space-y-4 text-center max-w-md mx-auto">
                 <div class="text-6xl mb-2" id="villa-icon">🏡</div>
                 <h3 class="text-lg font-bold text-pink-900" id="villa-title">Nhà Tranh Cơ Bản (Lv.0)</h3>
                 <p class="text-xs text-gray-600" id="villa-desc">Chưa có hiệu ứng phong thủy đặc biệt.</p>
-                <div class="bg-pink-50 p-3 rounded-xl text-sm font-bold text-pink-700">
+                <div class="bg-pink-50 p-3 rounded-xl text-sm font-bold text-pink-700 border border-pink-200">
                     Chi phí nâng cấp: <span id="villa-cost">500 Vàng / 50 💎</span>
                 </div>
                 <div class="flex space-x-2">
@@ -168,23 +168,21 @@
             </div>
         </section>
 
-        <!-- TAB 6: SỰ KIỆN LỄ HỘI & QUÀ TẶNG ĐỘC QUYỀN -->
+        <!-- TAB 6: SỰ KIỆN LỄ HỘI -->
         <section id="tab-weekend" class="hidden space-y-4">
-            <div class="bg-amber-100 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-sm space-y-2">
+            <div class="bg-amber-100 border-l-4 border-amber-600 p-4 rounded-r-lg shadow-sm space-y-2">
                 <h3 class="font-bold text-amber-900 text-base">🎁 Sự Kiện Lễ Hội Việt Nam & Quà Tặng Độc Quyền</h3>
-                <p class="text-xs text-amber-800">Vật phẩm độc quyền ngày lễ không bán trong cửa hàng! Nhận ngay hạt giống / cá giống giới hạn khi sự kiện diễn ra:</p>
+                <p class="text-xs text-amber-800">Vật phẩm độc quyền ngày lễ không bán trong cửa hàng! Nhận ngay hạt giống / cá giống giới hạn:</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="game-panel p-5 rounded-2xl shadow-sm border border-amber-200 space-y-3">
                     <h4 class="font-bold text-amber-900">🌟 Trạng Thái Sự Kiện Hôm Nay</h4>
-                    <div id="event-detail-box" class="text-xs text-slate-700 space-y-2 bg-amber-50 p-3 rounded-xl border border-amber-200">
-                        <!-- Render bằng JS -->
-                    </div>
+                    <div id="event-detail-box" class="text-xs text-slate-700 space-y-2 bg-amber-50 p-3 rounded-xl border border-amber-200"></div>
                     <button onclick="claimEventGift()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 rounded-xl text-xs shadow mt-2">Nhận Quà Độc Quyền Ngày Lễ 🎁</button>
                 </div>
                 <div class="game-panel p-5 rounded-2xl shadow-sm border border-amber-200 space-y-3">
                     <h4 class="font-bold text-amber-900">🔥 Đặc Quyền Nạp Thẻ X50% Cuối Tuần</h4>
-                    <p class="text-xs text-gray-500">Nhân dịp cuối tuần, khi nạp các gói kim cương dùng thử, bệ hạ sẽ được nhận thêm ưu đãi <span class="font-bold text-cyan-600">+50% Kim Cương miễn phí</span>!</p>
+                    <p class="text-xs text-gray-500">Nhân dịp cuối tuần hoặc lễ hội, khi nạp các gói kim cương dùng thử, bệ hạ sẽ được nhận thêm ưu đãi <span class="font-bold text-cyan-600">+50% Kim Cương miễn phí</span>!</p>
                     <button onclick="openTopUpModal()" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2.5 rounded-xl text-xs shadow">Nạp Kim Cương X50% Ngay 💎</button>
                 </div>
             </div>
@@ -192,28 +190,28 @@
 
         <!-- TAB 7: SỔ SƯU TẬP -->
         <section id="tab-collection" class="hidden space-y-4">
-            <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-lg shadow-sm">
-                <p class="font-semibold text-yellow-800">🏆 Sổ Sưu Tập (Mở khóa Lv.15):</p>
-                <p class="text-sm text-yellow-700">Sưu tầm đủ bộ vật phẩm để nhận danh hiệu hiển thị hoàng gia!</p>
+            <div class="bg-yellow-100 border-l-4 border-yellow-600 p-4 rounded-r-lg shadow-sm">
+                <p class="font-semibold text-yellow-900">🏆 Sổ Sưu Tập (Mở khóa Lv.15):</p>
+                <p class="text-xs text-yellow-800">Sưu tầm đủ bộ vật phẩm để nhận danh hiệu hiển thị hoàng gia!</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="collection-grid"></div>
         </section>
 
         <!-- TAB 8: CỬA HÀNG -->
         <section id="tab-shop" class="hidden space-y-4">
-            <h2 class="text-xl font-bold text-emerald-800">🛒 Cửa Hàng Giống (Trải dài đến Level 100)</h2>
+            <h2 class="text-xl font-bold text-emerald-100">🛒 Cửa Hàng Giống (Trải dài đến Level 100)</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="shop-list"></div>
         </section>
 
         <!-- TAB 9: KHO ĐỒ -->
         <section id="tab-inventory" class="hidden space-y-4">
-            <div class="flex justify-between items-center bg-emerald-100 border-l-4 border-emerald-500 p-4 rounded-r-lg shadow-sm">
+            <div class="flex justify-between items-center bg-emerald-100 border-l-4 border-emerald-600 p-4 rounded-r-lg shadow-sm">
                 <div>
-                    <p class="font-semibold text-emerald-800">🎒 Kho Chứa Đồ Thông Minh:</p>
-                    <p class="text-sm text-emerald-700">Mở rộng sức chứa kho bằng Vàng hoặc Kim Cương khi đầy!</p>
+                    <p class="font-semibold text-emerald-900">🎒 Kho Chứa Đồ Thông Minh:</p>
+                    <p class="text-xs text-emerald-800">Mở rộng sức chứa kho bằng Vàng hoặc Kim Cương khi đầy!</p>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <span class="text-xs font-bold text-emerald-900 bg-emerald-200 px-3 py-1 rounded-full">Sức chứa: <span id="inventory-capacity">12</span> ô</span>
+                    <span class="text-xs font-bold text-emerald-900 bg-emerald-200 px-3 py-1 rounded-full border border-emerald-300">Sức chứa: <span id="inventory-capacity">12</span> ô</span>
                     <button onclick="expandInventory()" class="bg-amber-600 hover:bg-amber-700 text-white text-xs px-3 py-1.5 rounded-lg font-bold shadow">Mở Rộng (+4 ô / 300🪙 hoặc 20💎)</button>
                 </div>
             </div>
@@ -222,7 +220,7 @@
 
     </main>
 
-    <!-- MODAL NẠP KIM CƯƠNG X50% (GIỚI HẠN TỐI ĐA 500) -->
+    <!-- MODAL NẠP KIM CƯƠNG X50% -->
     <div id="topup-modal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50 p-4">
         <div class="bg-white p-6 rounded-2xl max-w-sm w-full space-y-4 shadow-xl">
             <h3 class="text-lg font-bold text-slate-800 text-center">💎 Nạp Kim Cương (Ưu Đãi X50% Cuối Tuần)</h3>
@@ -242,13 +240,12 @@
     </div>
 
     <!-- Toast Thông Báo -->
-    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 text-sm">
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 text-sm border border-slate-700">
         Thông báo game
     </div>
 
     <!-- Script Xử Lý Logic Game -->
     <script>
-        // Cửa hàng thông thường (trải dài đến Level 100)
         const seedCatalog = {
             'seed_cabbage': { name: 'Hạt Cải Xanh', type: 'seed', level: 1, price: 20, reward: 40, duration: 10, exp: 20, icon: '🥬', category: 'farm' },
             'seed_carrot': { name: 'Hạt Cà Rốt', type: 'seed', level: 1, price: 50, reward: 100, duration: 20, exp: 45, icon: '🥕', category: 'farm' },
@@ -266,7 +263,6 @@
             'fish_dragon': { name: 'Long Ngư Cổ Đại', type: 'fish', level: 80, price: 4000, reward: 11000, duration: 500, exp: 3500, icon: '🐉', category: 'pond' }
         };
 
-        // Hạt giống & Cá giống Độc Quyền Ngày Lễ (Không có trong cửa hàng thường)
         const exclusiveHolidayItems = {
             'seed_tet_mai': { name: 'Hạt Giống Hoa Mai Vàng Tết', type: 'seed', reward: 300, duration: 15, exp: 80, icon: '🌸', category: 'farm', holiday: 'Tết Nguyên Đán' },
             'seed_hungvuong_sen': { name: 'Hạt Giống Bông Sen Đỏ Tổ Quốc', type: 'seed', reward: 500, duration: 20, exp: 120, icon: '🪷', category: 'farm', holiday: 'Giỗ Tổ Hùng Vương' },
@@ -274,7 +270,6 @@
             'fish_hoalinh_carp': { name: 'Cá Chép Hóa Long Thiêng Liêng', type: 'fish', reward: 1000, duration: 30, exp: 250, icon: '🐉', category: 'pond', holiday: 'Ngày Lễ' }
         };
 
-        // Lịch ngày lễ Việt Nam & Sự kiện cuối tuần
         function checkCurrentEvent() {
             const now = new Date();
             const month = now.getMonth() + 1;
@@ -315,7 +310,7 @@
                 'rare_rainbow_fish': 0
             },
             inventoryCapacity: 12,
-            villaLevel: 0, // Tối đa lên đến Lv.30
+            villaLevel: 0,
             hasCerberusDog: false,
             claimedEventToday: false,
             friends: [
@@ -335,11 +330,11 @@
                 const el = document.getElementById(`tab-${t}`);
                 const btn = document.getElementById(`btn-${t}`);
                 if(el) el.classList.add('hidden');
-                if(btn) { btn.classList.remove('bg-emerald-800', 'shadow'); btn.classList.add('hover:bg-emerald-600'); }
+                if(btn) { btn.classList.remove('bg-emerald-900', 'shadow'); btn.classList.add('hover:bg-emerald-700'); }
             });
             document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-            document.getElementById(`btn-${tabName}`).classList.add('bg-emerald-800', 'shadow');
-            document.getElementById(`btn-${tabName}`).classList.remove('hover:bg-emerald-600');
+            document.getElementById(`btn-${tabName}`).classList.add('bg-emerald-900', 'shadow');
+            document.getElementById(`btn-${tabName}`).classList.remove('hover:bg-emerald-700');
             
             if(tabName === 'farm') renderFarm();
             if(tabName === 'pond') renderPond();
@@ -421,7 +416,6 @@
             }
         }
 
-        // Nhận quà độc quyền ngày lễ
         function claimEventGift() {
             if(gameState.claimedEventToday) {
                 showToast("Bệ hạ đã nhận quà sự kiện hôm nay rồi!");
@@ -436,7 +430,9 @@
             renderInventory();
         }
 
-        // Nông Trại
+        // ==========================================
+        // SỬA LỖI LOGIC: PHÂN TÍCH RÕ RÀNG HẠT GIỐNG & CÁ GIỐNG
+        // ==========================================
         function renderFarm() {
             const grid = document.getElementById('farm-grid');
             grid.innerHTML = '';
@@ -444,28 +440,28 @@
             gameState.farmPlots.forEach((plot, index) => {
                 if(plot.state !== 'locked') unlockedCount++;
                 let content = '';
-                let bgClass = 'bg-amber-200 border-amber-400';
+                let bgClass = 'bg-amber-800/80 border-amber-600';
                 
                 if (plot.state === 'locked') {
-                    bgClass = 'bg-gray-200 border-gray-300 opacity-60';
-                    content = `<div class="text-center">🔒<p class="text-xs mt-1 font-semibold">Khóa</p></div>`;
+                    bgClass = 'bg-gray-800 border-gray-700 opacity-60';
+                    content = `<div class="text-center text-white">🔒<p class="text-xs mt-1 font-semibold">Khóa</p></div>`;
                 } else if (plot.state === 'empty') {
-                    // Kiểm tra xem đang chọn hạt giống nào (thường hoặc độc quyền lễ)
                     const activeSeed = seedCatalog[gameState.selectedSeed] || exclusiveHolidayItems[gameState.selectedSeed];
-                    content = `<div class="text-center cursor-pointer">🟫<p class="text-xs text-amber-900 font-semibold mt-1">Đất Trống</p><p class="text-[10px] text-emerald-700 font-bold">Trồng: ${activeSeed ? activeSeed.icon : '🥬'}</p></div>`;
+                    const isFish = activeSeed && activeSeed.category === 'pond';
+                    content = `<div class="text-center cursor-pointer">🟫<p class="text-xs text-amber-200 font-semibold mt-1">Đất Trống</p><p class="text-[10px] ${isFish ? 'text-red-400 font-bold' : 'text-emerald-300 font-bold'}">Trồng: ${activeSeed ? activeSeed.icon : '🥬'}</p>${isFish ? '<span class="text-[9px] text-red-300 block">⚠️ Không thể thả cá lên đất!</span>' : ''}</div>`;
                 } else if (plot.state === 'growing') {
                     const elapsed = Math.floor((Date.now() - plot.plantedTime) / 1000);
                     const left = Math.max(0, plot.duration - elapsed);
                     const item = seedCatalog[plot.seedKey] || exclusiveHolidayItems[plot.seedKey];
-                    content = `<div class="text-center cursor-pointer" onclick="speedUpFarm(${index})">${item ? item.icon : '🌱'}<p class="text-xs text-amber-900 font-semibold mt-1">Đang lớn (${left}s)</p><p class="text-[9px] text-cyan-600 font-bold underline">⚡ Tăng tốc (10💎)</p></div>`;
+                    content = `<div class="text-center cursor-pointer text-white" onclick="speedUpFarm(${index})">${item ? item.icon : '🌱'}<p class="text-xs text-amber-200 font-semibold mt-1">Đang lớn (${left}s)</p><p class="text-[9px] text-cyan-400 font-bold underline">⚡ Tăng tốc (10💎)</p></div>`;
                 } else if (plot.state === 'ready') {
-                    bgClass = 'bg-emerald-100 border-emerald-400 animate-pulse';
+                    bgClass = 'bg-emerald-800 border-emerald-400 animate-pulse';
                     const item = seedCatalog[plot.seedKey] || exclusiveHolidayItems[plot.seedKey];
-                    content = `<div class="text-center cursor-pointer">✨${item ? item.icon : '🥬'}<p class="text-xs text-emerald-800 font-bold mt-1">Thu hoạch!</p></div>`;
+                    content = `<div class="text-center cursor-pointer text-white">✨${item ? item.icon : '🥬'}<p class="text-xs text-emerald-200 font-bold mt-1">Thu hoạch!</p></div>`;
                 }
 
                 const card = document.createElement('div');
-                card.className = `h-36 rounded-2xl border-2 ${bgClass} flex flex-col items-center justify-center shadow-sm transition hover:scale-[1.02]`;
+                card.className = `h-36 rounded-2xl border-2 ${bgClass} flex flex-col items-center justify-center shadow-md transition hover:scale-[1.02]`;
                 card.innerHTML = content;
                 card.onclick = () => { if(plot.state === 'growing') return; handleFarmClick(index); };
                 grid.appendChild(card);
@@ -479,9 +475,16 @@
                 showToast("Ô đất này chưa mở khóa!");
             } else if (plot.state === 'empty') {
                 const seedKey = gameState.selectedSeed;
+                const item = seedCatalog[seedKey] || exclusiveHolidayItems[seedKey];
+                
+                // KIỂM TRA CHẶN LỖI: Nếu item đang chọn là cá (category === 'pond'), cấm trồng xuống đất
+                if (item && item.category === 'pond') {
+                    showToast("❌ Không thể thả cá giống xuống ô đất nông trại!");
+                    return;
+                }
+
                 if ((gameState.inventory[seedKey] || 0) > 0) {
                     gameState.inventory[seedKey]--;
-                    const item = seedCatalog[seedKey] || exclusiveHolidayItems[seedKey];
                     plot.state = 'growing';
                     plot.seedKey = seedKey;
                     plot.plantedTime = Date.now();
@@ -507,8 +510,6 @@
                 const ev = checkCurrentEvent();
                 let baseReward = item.reward || 100;
                 if(ev.isWeekend) baseReward *= 2;
-
-                // Thưởng vàng tăng theo cấp độ lâu đài (mỗi level lâu đài tăng 2% giá trị)
                 let finalGold = Math.floor(baseReward * (1 + gameState.villaLevel * 0.02));
 
                 gameState.gold += finalGold;
@@ -555,26 +556,26 @@
             gameState.pondSlots.forEach((slot, index) => {
                 if(slot.state !== 'locked') unlockedCount++;
                 let content = '';
-                let bgClass = 'bg-cyan-100 border-cyan-300';
+                let bgClass = 'bg-cyan-900/80 border-cyan-500';
 
                 if (slot.state === 'locked') {
-                    bgClass = 'bg-gray-200 border-gray-300 opacity-60';
-                    content = `<div class="text-center">🔒<p class="text-xs mt-1 font-semibold">Khóa</p></div>`;
+                    bgClass = 'bg-gray-800 border-gray-700 opacity-60';
+                    content = `<div class="text-center text-white">🔒<p class="text-xs mt-1 font-semibold">Khóa</p></div>`;
                 } else if (slot.state === 'empty') {
-                    content = `<div class="text-center cursor-pointer">💧<p class="text-xs text-cyan-900 font-semibold mt-1">Ao Trống</p><p class="text-[10px] text-blue-600 font-bold">Thả cá</p></div>`;
+                    content = `<div class="text-center cursor-pointer text-white">💧<p class="text-xs text-cyan-200 font-semibold mt-1">Ao Trống</p><p class="text-[10px] text-cyan-300 font-bold">Thả cá xuống ao</p></div>`;
                 } else if (slot.state === 'growing') {
                     const elapsed = Math.floor((Date.now() - slot.fedTime) / 1000);
                     const left = Math.max(0, slot.duration - elapsed);
                     const item = seedCatalog[slot.fishKey] || exclusiveHolidayItems[slot.fishKey];
-                    content = `<div class="text-center cursor-pointer" onclick="speedUpPond(${index})">${item ? item.icon : '🐟'}<p class="text-xs text-cyan-900 font-semibold mt-1">Cá lớn (${left}s)</p><p class="text-[9px] text-cyan-600 font-bold underline">⚡ Tăng tốc (10💎)</p></div>`;
+                    content = `<div class="text-center cursor-pointer text-white" onclick="speedUpPond(${index})">${item ? item.icon : '🐟'}<p class="text-xs text-cyan-200 font-semibold mt-1">Cá lớn (${left}s)</p><p class="text-[9px] text-cyan-400 font-bold underline">⚡ Tăng tốc (10💎)</p></div>`;
                 } else if (slot.state === 'ready') {
-                    bgClass = 'bg-yellow-100 border-yellow-400 animate-pulse';
+                    bgClass = 'bg-yellow-800 border-yellow-400 animate-pulse';
                     const item = seedCatalog[slot.fishKey] || exclusiveHolidayItems[slot.fishKey];
-                    content = `<div class="text-center cursor-pointer">👑${item ? item.icon : '🐟'}<p class="text-xs text-yellow-800 font-bold mt-1">Thu hoạch!</p></div>`;
+                    content = `<div class="text-center cursor-pointer text-white">👑${item ? item.icon : '🐟'}<p class="text-xs text-yellow-200 font-bold mt-1">Thu hoạch!</p></div>`;
                 }
 
                 const card = document.createElement('div');
-                card.className = `h-36 rounded-2xl border-2 ${bgClass} flex flex-col items-center justify-center shadow-sm transition hover:scale-[1.02]`;
+                card.className = `h-36 rounded-2xl border-2 ${bgClass} flex flex-col items-center justify-center shadow-md transition hover:scale-[1.02]`;
                 card.innerHTML = content;
                 card.onclick = () => { if(slot.state === 'growing') return; handlePondClick(index); };
                 grid.appendChild(card);
@@ -602,7 +603,7 @@
                     slot.duration = finalDuration;
                     showToast(`Đã thả ${item.name} vào ao!`);
                     renderPond();
-                } else { showToast("Bạn đã hết cá giống trong kho!"); }
+                } else { showToast("Bạn đã hết cá giống trong kho! Hãy mua ở cửa hàng."); }
             } else if (slot.state === 'ready') {
                 if (getTotalInventoryCount() >= gameState.inventoryCapacity) {
                     showToast("🎒 Kho chứa đã đầy!");
@@ -744,7 +745,6 @@
             if(logBox) logBox.innerHTML = gameState.logs.map(l => `<p>• ${l}</p>`).join('');
         }
 
-        // Lâu Đài Tối Đa Lv.30
         function renderVilla() {
             const currentLevel = gameState.villaLevel;
             let icon = '🏡'; let title = 'Nhà Tranh Cơ Bản';
@@ -837,7 +837,7 @@
                         <span class="text-3xl">${item.icon}</span>
                         <div>
                             <h4 class="font-bold text-slate-800 text-sm">${item.name}</h4>
-                            <p class="text-xs text-emerald-600 font-semibold">Giá: ${item.price} Vàng</p>
+                            <p class="text-xs text-emerald-600 font-semibold">Giá: ${item.price} Vàng (${item.category === 'farm' ? 'Nông Trại' : 'Ao Cá'})</p>
                             ${isLocked ? `<p class="text-[10px] text-red-500 font-bold">Yêu cầu Level ${item.level}</p>` : `<p class="text-[10px] text-gray-400">Thu: +${item.reward} V</p>`}
                         </div>
                     </div>
@@ -873,7 +873,12 @@
                 if (qty > 0) {
                     let displayName = key;
                     let icon = '📦';
-                    if(allItems[key]) { displayName = allItems[key].name; icon = allItems[key].icon; }
+                    let catLabel = '';
+                    if(allItems[key]) { 
+                        displayName = allItems[key].name; 
+                        icon = allItems[key].icon; 
+                        catLabel = allItems[key].category === 'farm' ? '🌱 (Dùng cho Đất)' : '🐟 (Dùng cho Ao)';
+                    }
                     else if(key.startsWith('harvest_')) { displayName = 'Thu: ' + key.replace('harvest_', '').toUpperCase(); icon = '✨'; }
                     else if(key === 'rare_dragon_fish') { displayName = 'Cá Rồng Hoàng Kim'; icon = '🐉'; }
                     else if(key === 'rare_rainbow_fish') { displayName = 'Cá Thần Bảy Sắc'; icon = '🌈'; }
@@ -883,8 +888,9 @@
                     card.innerHTML = `
                         <div class="text-3xl mb-1">${icon}</div>
                         <h4 class="font-bold text-xs text-slate-800">${displayName}</h4>
-                        <p class="text-xs text-emerald-600 font-bold mt-2">Số lượng: ${qty}</p>
-                        <button onclick="selectSeedForPlanting('${key}')" class="mt-2 bg-amber-500 hover:bg-amber-600 text-white text-[10px] py-1 px-2 rounded font-bold">Chọn Trồng</button>
+                        <p class="text-[10px] text-blue-600 font-semibold">${catLabel}</p>
+                        <p class="text-xs text-emerald-600 font-bold mt-1">Số lượng: ${qty}</p>
+                        <button onclick="selectSeedForPlanting('${key}')" class="mt-2 bg-amber-500 hover:bg-amber-600 text-white text-[10px] py-1 px-2 rounded font-bold shadow">Chọn Sử Dụng</button>
                     `;
                     grid.appendChild(card);
                 }
@@ -893,8 +899,8 @@
 
         function selectSeedForPlanting(seedKey) {
             gameState.selectedSeed = seedKey;
-            showToast(`Đã chọn ${seedCatalog[seedKey]?.name || exclusiveHolidayItems[seedKey]?.name || seedKey} để gieo trồng!`);
-            switchTab('farm');
+            const item = seedCatalog[seedKey] || exclusiveHolidayItems[seedKey];
+            showToast(`Đã chọn ${item ? item.name : seedKey}! Hãy quay lại khu vực tương ứng.`);
         }
 
         function checkLevelUp() {
